@@ -1,20 +1,8 @@
-'use client';
 import Head from 'next/head'
-import styles from '@/styles/Home.module.css'
-import podcastsService from '@/services/podcasts.service'
-import { useEffect } from 'react'
+import styles from '@/styles/LandingPage.module.css'
+import Header from '@/components/Header/Header'
 
-export default function Home() {
-
-  useEffect(() => {
-    podcastsService.getLimitedPodcastsByGenre(100, 1310)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.error(err);
-      })
-  }, [])
+export default function LandingPage() {
 
   return (
     <>
@@ -25,7 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-
+        <Header />
       </main>
     </>
   )

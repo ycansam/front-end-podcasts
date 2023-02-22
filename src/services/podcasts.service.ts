@@ -7,5 +7,5 @@ class PodcastsService {
 
 }
 
-const usersService = new PodcastsService();
-export default usersService;
+const podcastsService = new PodcastsService();
+export default podcastsService;
