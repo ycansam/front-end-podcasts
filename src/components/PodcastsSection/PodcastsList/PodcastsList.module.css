@@ -1,0 +1,11 @@
+.ulPodcasts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+}
+
+.ulPodcasts>li {
+  padding: 12px;
+  margin-bottom: 6.5rem;
+  margin-top: 1rem;
+}

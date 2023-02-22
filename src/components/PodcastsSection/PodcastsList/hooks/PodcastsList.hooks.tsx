@@ -2,13 +2,18 @@ import Link from "next/link"
 import podcastsService from "@/services/podcasts.service";
 import { useEffect, useState } from "react";
 
+const podcastsPetition = {
+    limitation: 100,
+    genre: 1310
+}
+
 const PodcastsListHooks: any = () => {
 
     const [podcasts, setPodcasts] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
 
     const fetchPodcasts = () => {
-        podcastsService.getLimitedPodcastsByGenre(100, 1310)
+        podcastsService.getLimitedPodcastsByGenre(podcastsPetition.limitation, podcastsPetition.genre)
             .then(res => {
                 // entry contiene el array de podcasts
                 const { entry } = res.data.feed;
