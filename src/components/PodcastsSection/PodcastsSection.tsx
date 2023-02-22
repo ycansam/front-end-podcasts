@@ -1,22 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './PodcastsSection.module.css'
 import PodcastsList from "./PodcastsList/PodcastsList"
 import FilterPodcasts from './FilterPodcasts/FilterPodcasts';
 import PodcastsListHooks from './PodcastsList/hooks/PodcastsList.hooks';
+import TPodcast from '@/types/TPodcast';
+
+type PodcastsListHooksReturn = {
+    podcasts: TPodcast[];
+    isFetching: boolean;
+};
 
 const PodcastsSection: React.FC = () => {
 
 
-    const { podcasts, isFetching } = PodcastsListHooks();
+    const { podcasts, isFetching }: PodcastsListHooksReturn = PodcastsListHooks();
     const [filter, setFilter] = useState('');
 
     if (isFetching)
         return <p>is loading...</p>
 
     const getPodcastsFiltred = () => {
-        return podcasts.filter((podcast: any) => {
-            const name: string = podcast["im:name"].label
-            console.log(name.includes(filter));
+        return podcasts.filter((podcast) => {
+            
+            const name = podcast["im:name"].label;
+            
+            // En caso de que el nombre del podcast contenga el filtro introducido devuelve el podcast
             return name.toLowerCase().includes(filter.toLowerCase()) && podcast;
         });
     }

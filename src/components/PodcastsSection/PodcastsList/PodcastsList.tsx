@@ -1,25 +1,9 @@
 import styles from './PodcastsList.module.css'
 import PodcastViewLink from "./PodcastViewLink/PodcastViewLink";
-
-type TPodcastFetched = {
-    id: {
-        attributes: {
-            "im:id": string;
-        }
-    };
-    "im:image": Array<{
-        label: string;
-    }>;
-    "im:name": {
-        label: string;
-    };
-    "im:artist": {
-        label: string;
-    };
-}
+import TPodcast from '@/types/TPodcast';
 
 type TPodcastsArray = {
-    podcasts: TPodcastFetched[];
+    podcasts: TPodcast[];
 }
 
 const PodcastsList: React.FC<TPodcastsArray> = ({ podcasts }) => {
