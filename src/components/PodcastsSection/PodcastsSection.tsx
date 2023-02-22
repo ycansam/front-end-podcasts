@@ -12,7 +12,6 @@ type PodcastsListHooksReturn = {
 
 const PodcastsSection: React.FC = () => {
 
-
     const { podcasts, isFetching }: PodcastsListHooksReturn = PodcastsListHooks();
     const [filter, setFilter] = useState('');
 
@@ -21,9 +20,9 @@ const PodcastsSection: React.FC = () => {
 
     const getPodcastsFiltred = () => {
         return podcasts.filter((podcast) => {
-            
+
             const name = podcast["im:name"].label;
-            
+
             // En caso de que el nombre del podcast contenga el filtro introducido devuelve el podcast
             return name.toLowerCase().includes(filter.toLowerCase()) && podcast;
         });
@@ -32,7 +31,8 @@ const PodcastsSection: React.FC = () => {
 
     return (
         <section className={styles.sectionContainer}>
-            <FilterPodcasts setFilter={setFilter} filter={filter} />
+            
+            <FilterPodcasts setFilter={setFilter} filter={filter} podcastsLength={podcasts.length} />
             <PodcastsList podcasts={getPodcastsFiltred()} />
         </section>
     )

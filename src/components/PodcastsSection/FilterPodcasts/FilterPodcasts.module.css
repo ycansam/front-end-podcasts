@@ -1,0 +1,25 @@
+.containerFilter{
+    margin-top: 1rem;
+    margin-right: 1rem;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+.podcastsLength{
+    margin-right: 1rem;
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+    background-color: rgb(35, 125, 163);
+    border-radius: var(--border-radius);
+}
+
+.filter{
+    border-radius: var(--border-radius);
+    border: 2px solid rgba(198, 198, 198, 0.558);; /* set a border with a width of 1px and a color of #ccc */
+    border-radius: 4px; /* add some border radius to make the corners slightly rounded */
+    border-color: rgba(198, 198, 198, 0.558); 
+    width: 30rem;
+    padding: 0.75rem;
+    font-size: 17px;
+}
