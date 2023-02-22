@@ -1,5 +1,4 @@
 import styles from './PodcastsList.module.css'
-import PodcastsListHooks from "./hooks/PodcastsList.hooks";
 import PodcastViewLink from "./PodcastViewLink/PodcastViewLink";
 
 type TPodcastFetched = {
@@ -19,17 +18,16 @@ type TPodcastFetched = {
     };
 }
 
-const PodcastsList: React.FC = () => {
+type TPodcastsArray = {
+    podcasts: TPodcastFetched[];
+}
 
-    const { podcasts, isFetching } = PodcastsListHooks();
-
-    if (isFetching)
-        return <p>is loading...</p>
+const PodcastsList: React.FC<TPodcastsArray> = ({ podcasts }) => {
 
     return (
         <ul className={styles.ulPodcasts}>
             {/* Genera un PodcastViewLink por cada uno de los podcast del array */}
-            {podcasts.map((podcast: TPodcastFetched, index: number) => {
+            {podcasts.map((podcast, index: number) => {
                 console.log(podcast)
                 return <li key={index}>
                     <PodcastViewLink
