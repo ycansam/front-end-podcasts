@@ -4,36 +4,32 @@ import PodcastsList from "./PodcastsList/PodcastsList"
 import FilterPodcasts from './FilterPodcasts/FilterPodcasts';
 import PodcastsListHooks from './PodcastsList/hooks/PodcastsList.hooks';
 import TPodcast from '@/types/TPodcast';
+import PodcastsSectionServices from './services/PodcastsSection.service';
 
 type PodcastsListHooksReturn = {
     podcasts: TPodcast[];
     isFetching: boolean;
 };
 
+type PodcastsSectionServicesReturn = {
+    getPodcastsFiltred: (podcasts: TPodcast[], filter: string) => TPodcast[];
+};
+
 const PodcastsSection: React.FC = () => {
 
-    const { podcasts, isFetching }: PodcastsListHooksReturn = PodcastsListHooks();
     const [filter, setFilter] = useState('');
+    
+    const { podcasts, isFetching }: PodcastsListHooksReturn = PodcastsListHooks();
+    const { getPodcastsFiltred }: PodcastsSectionServicesReturn = PodcastsSectionServices();
 
     if (isFetching)
         return <p>is loading...</p>
 
-    const getPodcastsFiltred = () => {
-        return podcasts.filter((podcast) => {
-
-            const name = podcast["im:name"].label;
-
-            // En caso de que el nombre del podcast contenga el filtro introducido devuelve el podcast
-            return name.toLowerCase().includes(filter.toLowerCase()) && podcast;
-        });
-    }
-
-
     return (
         <section className={styles.sectionContainer}>
-            
+
             <FilterPodcasts setFilter={setFilter} filter={filter} podcastsLength={podcasts.length} />
-            <PodcastsList podcasts={getPodcastsFiltred()} />
+            <PodcastsList podcasts={getPodcastsFiltred(podcasts, filter)} />
         </section>
     )
 }
