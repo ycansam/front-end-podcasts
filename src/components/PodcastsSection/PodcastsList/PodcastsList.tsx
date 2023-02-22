@@ -28,7 +28,6 @@ const PodcastsList: React.FC<TPodcastsArray> = ({ podcasts }) => {
         <ul className={styles.ulPodcasts}>
             {/* Genera un PodcastViewLink por cada uno de los podcast del array */}
             {podcasts.map((podcast, index: number) => {
-                console.log(podcast)
                 return <li key={index}>
                     <PodcastViewLink
                         id={podcast.id.attributes["im:id"]}
