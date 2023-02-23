@@ -13,6 +13,9 @@ type PodcastsListHooksReturn = {
 
 const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }) => {
     const { podcastDetails, isFetching }: PodcastsListHooksReturn = PodcastDetailsHooks(podcastid);
+    
+    if (isFetching)
+        return <p>is loading...</p>
 
     return (
         <section className={styles.sectionContainer}>
