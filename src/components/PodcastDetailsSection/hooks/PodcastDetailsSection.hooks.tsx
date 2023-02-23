@@ -1,27 +1,28 @@
 import podcastsService from "@/services/podcasts.service";
+import TPodcastDetails from "@/types/TPodcastDetails";
 import { useEffect, useState } from "react";
 
-const PodcastDetailsHooks = (podcastid: string) => {
+const PodcastDetailsHooks: any = (podcastid: string) => {
 
-    const [podcast, setPodcast] = useState({});
+    const [podcastDetails, setPodcastDetails] = useState({});
     const [isFetching, setIsFetching] = useState(true);
 
-    const fetchPodcast = () => {
+    const fetchPodcastDetails = () => {
         podcastsService.getPodcastDetails(podcastid).then(res => {
-            console.log(res)
+            const podcast: TPodcastDetails = res.data.results[0];
+            setPodcastDetails(podcast)
         }).catch(err => {
             console.error(err)
-        })
-        .finally(() => {
+        }).finally(() => {
             setIsFetching(false);
         })
     }
 
     useEffect(() => {
-        fetchPodcast();
+        fetchPodcastDetails();
     }, [])
 
-    return { podcast, isFetching }
+    return { podcastDetails, isFetching }
 }
 
 export default PodcastDetailsHooks;

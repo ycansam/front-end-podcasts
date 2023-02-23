@@ -14,8 +14,6 @@ class PodcastsService {
         return router.get(`/lookup?id=${podcastId}&entity=podcastEpisode&limit=${limit}&offset=${offset}`);
     }
 
-    
-
 }
 
 const podcastsService = new PodcastsService();

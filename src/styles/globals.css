@@ -26,3 +26,8 @@ a {
   padding: 0;
   font-family: var(--font);
 }
+hr {
+  border: none; /* remove the default border */
+  border-top: 1px solid #ccc; /* add a new top border */
+  margin: 10px 0; /* add some margin to top and bottom */
+}

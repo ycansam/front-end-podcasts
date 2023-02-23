@@ -1,0 +1,41 @@
+.cardContainer {
+    width: 19rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: max-content;
+    margin-bottom: 0.5rem;
+    margin-left: 1rem;
+    padding: 1.5rem 0;
+}
+
+.cardContainer>img {
+    width: 13rem;
+    border-radius: var(--border-radius);
+}
+
+/* Se ajusta para todos los textos */
+.cardContainer>div {
+    width: 90%;
+    box-sizing: border-box;
+
+}
+.cardContainer>div>* {
+    text-align: left;
+    font-size: 16px;
+}
+/* titulos nombre y creador */
+.containerTitles {
+    margin: 1.5rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(213, 213, 213, 0.552);
+    border-bottom: 1px solid rgba(213, 213, 213, 0.552);
+    padding-left: 0.5rem;
+}
+
+.artist{
+    font-weight: 400;
+    font-style: italic;
+}
