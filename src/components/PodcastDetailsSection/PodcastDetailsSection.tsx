@@ -18,7 +18,6 @@ type PodcastsListHooksReturn = {
 
 const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }) => {
     const { podcastDetails, podcastsEpisodes, isFetchingDetails, isFetchingEpisodes }: PodcastsListHooksReturn = PodcastDetailsHooks(podcastid);
-    console.log(podcastDetails);
 
     if (isFetchingDetails || isFetchingEpisodes)
         return <p>is loading...</p>
@@ -31,7 +30,10 @@ const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }) 
                 image={podcastDetails.artworkUrl600}
                 description={podcastDetails.trackExplicitness}
             />
-            <EpisodesList episodes={podcastsEpisodes} episodesLength={podcastDetails.trackCount} />
+            <EpisodesList
+                episodes={podcastsEpisodes}
+                episodesLength={podcastDetails.trackCount}
+            />
         </section>
     )
 }

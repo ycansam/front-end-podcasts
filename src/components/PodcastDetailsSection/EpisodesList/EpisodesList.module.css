@@ -10,19 +10,44 @@
     padding: 0.5rem 1rem;
 }
 
-
-.tableEpisodes {
+.containerTable {
     margin-top: 2rem;
-    width: 100%;
+    width: auto;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
+    padding: 1rem 1.25rem;
+}
+
+.tableEpisodes {
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .tableEpisodes>tr>th {
     text-align: left;
-    padding: 0.5rem;
+}
+
+.tableEpisodes th {
+    border-bottom: 4px solid rgba(197, 197, 197, 0.622);
+    padding-bottom: 0.75rem;
+    padding: 1rem;
+}
+
+
+.tableEpisodes>tr>td {
+    padding: 1rem;
+}
+
+.trEpisodes {
+    border-bottom: 2px solid rgb(233, 233, 233);
+    padding-bottom: 0.75rem;
 }
 
 .thTitle {
     width: 70%;
+}
+
+/* Clase para distingir las filas */
+.oddBackgroundColorRowEpisode {
+    background-color: rgb(250, 250, 250);
 }
