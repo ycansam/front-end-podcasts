@@ -2,7 +2,7 @@ import TPodcast from "@/types/TPodcast";
 
 const PodcastsSectionServices: any = () => {
 
-    const getPodcastsFiltred = (podcasts: TPodcast[], filter: string) => {
+    const getFiltredPodcastsByName = (podcasts: TPodcast[], filter: string) => {
         return podcasts.filter((podcast) => {
 
             const name = podcast["im:name"].label;
@@ -12,7 +12,7 @@ const PodcastsSectionServices: any = () => {
         });
     }
 
-    return { getPodcastsFiltred }
+    return { getFiltredPodcastsByName }
 }
 
 export default PodcastsSectionServices;

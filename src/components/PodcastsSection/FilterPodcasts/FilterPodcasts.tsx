@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useCallback } from 'react';
 import styles from './FilterPodcasts.module.css'
 
 type TPropsFilter = {
@@ -9,9 +9,9 @@ type TPropsFilter = {
 
 const FilterPodcasts: React.FC<TPropsFilter> = ({ filter, setFilter, podcastsLength }) => {
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         setFilter((prevState) => (event.target.value));
-    }
+    }, [setFilter]);
 
     return (
         <div className={styles.containerFilter} >

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import styles from './PodcastsSection.module.css'
 import PodcastsList from "./PodcastsList/PodcastsList"
 import FilterPodcasts from './FilterPodcasts/FilterPodcasts';
@@ -12,15 +12,21 @@ type PodcastsListHooksReturn = {
 };
 
 type PodcastsSectionServicesReturn = {
-    getPodcastsFiltred: (podcasts: TPodcast[], filter: string) => TPodcast[];
+    getFiltredPodcastsByName: (podcasts: TPodcast[], filter: string) => TPodcast[];
 };
 
 const PodcastsSection: React.FC = () => {
 
-    const [filter, setFilter] = useState('');
-    
     const { podcasts, isFetching }: PodcastsListHooksReturn = PodcastsListHooks();
-    const { getPodcastsFiltred }: PodcastsSectionServicesReturn = PodcastsSectionServices();
+
+    const [filter, setFilter] = useState('');
+
+    const { getFiltredPodcastsByName }: PodcastsSectionServicesReturn = PodcastsSectionServices();
+
+    // guarda el valor del resultado de la funcion y es llamada cada vez que filtro o podcasts varian
+    const filtredPodcasts = useMemo(() => {
+        return getFiltredPodcastsByName(podcasts, filter);
+    }, [filter, getFiltredPodcastsByName, podcasts]);
 
     if (isFetching)
         return <p>is loading...</p>
@@ -28,8 +34,8 @@ const PodcastsSection: React.FC = () => {
     return (
         <section className={styles.sectionContainer}>
 
-            <FilterPodcasts setFilter={setFilter} filter={filter} podcastsLength={podcasts.length} />
-            <PodcastsList podcasts={getPodcastsFiltred(podcasts, filter)} />
+            <FilterPodcasts setFilter={setFilter} filter={filter} podcastsLength={filtredPodcasts.length} />
+            <PodcastsList podcasts={filtredPodcasts} />
         </section>
     )
 }
