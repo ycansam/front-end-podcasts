@@ -10,8 +10,8 @@ class PodcastsService {
         return router.get(`/lookup?id=${podcastId}&entity=podcast`);
     }
 
-    getPodcastEpisodes(podcastId: string, offset: number = 0, limit: number = 200) {
-        return router.get(`/lookup?id=${podcastId}&entity=podcastEpisode&limit=${limit}&offset=${offset}`);
+    getPodcastEpisodes(podcastId: string, offset: number = 0, limit: number = 50) {
+        return router.get(`/lookup?id=${podcastId}&entity=podcastEpisode&offset=${offset}&limit=${limit}`);
     }
 
 }

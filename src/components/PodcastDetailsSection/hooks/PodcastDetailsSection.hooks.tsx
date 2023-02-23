@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const PodcastDetailsHooks: any = (podcastid: string) => {
 
     const [podcastDetails, setPodcastDetails] = useState({});
-    const [podcastsEpisodes, setPodcastEpisodes] = useState({});
+    const [podcastsEpisodes, setPodcastEpisodes] = useState([{}]);
     const [isFetchingDetails, setIsFetchingDetails] = useState(true);
     const [isFetchingEpisodes, setIsFetchingEpisodes] = useState(true);
 
@@ -22,7 +22,7 @@ const PodcastDetailsHooks: any = (podcastid: string) => {
     }
 
     const fetchPodcastEpisodes = () => {
-        podcastsService.getPodcastEpisodes(podcastid).then(res => {
+        podcastsService.getPodcastEpisodes(podcastid, 200).then(res => {
             const episodes: TPodcastEpisode[] = res.data.results;
             setPodcastEpisodes(episodes);
         }).catch(err => {
@@ -31,6 +31,17 @@ const PodcastDetailsHooks: any = (podcastid: string) => {
             setIsFetchingEpisodes(false);
         })
     }
+    
+    // const fetchMoreEpisodes = () => {
+    //     podcastsService.getPodcastEpisodes(podcastid, podcastsEpisodes.length + 200).then(res => {
+    //         const episodes: TPodcastEpisode[] = res.data.results;
+    //         setPodcastEpisodes((prevEpisodes) => prevEpisodes.concat(episodes));
+    //     }).catch(err => {
+    //         console.error(err)
+    //     }).finally(() => {
+    //         setIsFetchingEpisodes(false);
+    //     })
+    // }
 
     useEffect(() => {
         fetchPodcastDetails();
