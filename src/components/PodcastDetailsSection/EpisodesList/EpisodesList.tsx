@@ -13,14 +13,20 @@ const EpisodesList: React.FC<TEpisodesArray> = ({ episodes, episodesLength }) =>
             <header>
                 <h1>Episodes: {episodesLength}</h1>
             </header>
-            <ul className={styles.ulEpisodes}>
-                {/* Genera un PodcastViewLink por cada uno de los podcast del array */}
-                {episodes.map((episodes, index: number) => {
-                    return <li key={index}>
-
-                    </li>
+            <table className={styles.tableEpisodes}>
+                <tr>
+                    <th className={styles.thTitle}>Title</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+                </tr>
+                {episodes.map((episode, index) => {
+                    return <tr key={index} >
+                        <td>{episode.trackName}</td>
+                        <td>{episode.releaseDate}</td>
+                        <td>{episode.trackTimeMillis}</td>
+                    </tr>
                 })}
-            </ul>
+            </table>
         </div>
     )
 }

@@ -9,3 +9,20 @@
     box-shadow: var(--box-shadow);
     padding: 0.5rem 1rem;
 }
+
+
+.tableEpisodes {
+    margin-top: 2rem;
+    width: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.tableEpisodes>tr>th {
+    text-align: left;
+    padding: 0.5rem;
+}
+
+.thTitle {
+    width: 70%;
+}
