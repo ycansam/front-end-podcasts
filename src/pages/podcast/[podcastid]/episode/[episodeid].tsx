@@ -2,18 +2,24 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import Header from '@/components/Header/Header'
 import EpisodeDetialsSection from '@/components/EpisodeDetailsSection/EpisodeDetailsSection'
-const PodcastPage = () => {
-    
+
+type TEpisodePageQuery = {
+    podcastid: string;
+    episodeid: string;
+}
+
+const EpisodePage = () => {
+
     const router = useRouter()
-    const { podcastid, episodeid } = router.query;
+    const { podcastid, episodeid } = router.query as TEpisodePageQuery;
 
     console.log({ podcastid, episodeid });
     if (episodeid)
         return (
             <div>
                 <Header />
-                <EpisodeDetialsSection episodeid={episodeid} podcastDetails={{}} />
+                <EpisodeDetialsSection episodeid={episodeid} podcastid={podcastid} />
             </div>
         )
 }
-export default PodcastPage;
+export default EpisodePage;
