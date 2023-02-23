@@ -1,12 +1,7 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PodcastDetailsServices from "../services/PodcastDetails.service";
-import TPodcastDetails from "@/types/TPodcastDetails";
 import TPodcastEpisode from "@/types/TPodcastEpisode";
-
-type TDetailsServicesReturn = {
-    fetchPodcastDetails: (podcastid: string, setState: Dispatch<SetStateAction<TPodcastDetails>>, setFetching: Dispatch<SetStateAction<boolean>>) => void;
-    fetchPodcastEpisodes: (podcastid: string, setState: Dispatch<SetStateAction<TPodcastEpisode[]>>, setFetching: Dispatch<SetStateAction<boolean>>) => void;
-}
+import TDetailsServicesReturn from "../types/TPodcastDetailsServicesReturn";
 
 const PodcastDetailsHooks: any = (podcastid: string) => {
 

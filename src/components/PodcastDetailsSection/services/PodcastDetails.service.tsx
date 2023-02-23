@@ -3,7 +3,20 @@ import TPodcastDetails from "@/types/TPodcastDetails";
 import TPodcastEpisode from "@/types/TPodcastEpisode";
 import { Dispatch, SetStateAction } from "react";
 
-const PodcastDetailsServices: any = () => {
+type TPocastDetailSersericesReturn = {
+    fetchPodcastDetails: (
+        podcastid: string,
+        setState: Dispatch<SetStateAction<TPodcastDetails>>,
+        setFetching: Dispatch<SetStateAction<boolean>>
+    ) => void;
+    fetchPodcastEpisodes: (
+        podcastid: string,
+        setState: Dispatch<SetStateAction<TPodcastEpisode[]>>,
+        setFetching: Dispatch<SetStateAction<boolean>>
+    ) => void;
+}
+
+const PodcastDetailsServices: any = (): TPocastDetailSersericesReturn => {
 
     const fetchPodcastDetails = (podcastid: string, setState: Dispatch<SetStateAction<TPodcastDetails>>, setFetching: Dispatch<SetStateAction<boolean>>) => {
         podcastsService.getPodcastDetails(podcastid).then(res => {
