@@ -18,8 +18,10 @@ const TableEpisodes: React.FC<TTableEpisodes> = ({ episodes }) => {
         </thead>
         <tbody>
             {episodes.map((episode, index) => {
-                // pasamos las propiedades necesarias del episodio con {...episode}
-                return <TrEpisode key={index} index={index} episode={{ ...episode }} />
+                // Filtramos el primer episodio que no es un podcast
+                if (index != 0)
+                    // pasamos las propiedades necesarias del episodio con {...episode}
+                    return <TrEpisode key={index} index={index} episode={{ ...episode }} />
             })}
         </tbody>
     </table>

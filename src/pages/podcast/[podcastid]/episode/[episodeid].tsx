@@ -13,7 +13,6 @@ const EpisodePage = () => {
     const router = useRouter()
     const { podcastid, episodeid } = router.query as TEpisodePageQuery;
 
-    console.log({ podcastid, episodeid });
     if (episodeid)
         return (
             <div>

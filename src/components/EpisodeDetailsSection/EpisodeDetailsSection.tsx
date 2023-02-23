@@ -2,6 +2,7 @@ import styles from './EpisodeDetailsSection.module.css'
 import EpisodeDetailsHooks from './hooks/EpisodeDetails.hooks'
 import PodcastDetailsCard from '../PodcastDetailsCard/PodcastDetailsCard'
 import TPodcastDetails from '@/types/TPodcastDetails'
+import EpisodeCard from './EpisodeCard/EpisodeCard'
 
 type TEpisodeDetailsSection = {
     episodeid: string;
@@ -12,7 +13,6 @@ type EpisodeDetailsHooksReturn = {
     podcastDetails: TPodcastDetails;
     isFetchingPodcastDetails: boolean;
 }
-
 
 const EpisodeDetialsSection: React.FC<TEpisodeDetailsSection> = ({ podcastid, episodeid }) => {
 
@@ -29,6 +29,7 @@ const EpisodeDetialsSection: React.FC<TEpisodeDetailsSection> = ({ podcastid, ep
                 image={podcastDetails.artworkUrl600}
                 description={podcastDetails.trackExplicitness}
             />
+            <EpisodeCard episode={""}/>
 
         </section>
     )
