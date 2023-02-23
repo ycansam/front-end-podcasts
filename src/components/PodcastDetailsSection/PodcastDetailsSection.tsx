@@ -4,6 +4,7 @@ import styles from './PodcastDetailsSection.module.css'
 import PodcastDetailsHooks from './hooks/PodcastDetailsSection.hooks';
 import TPodcastDetails from '@/types/TPodcastDetails';
 import TPodcastEpisode from '@/types/TPodcastEpisode';
+import PodcastContext from './contexts/PodcastDetailsSection.context';
 
 type TPodcastDetailsSection = {
     podcastid: string;
@@ -30,10 +31,13 @@ const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }) 
                 image={podcastDetails.artworkUrl600}
                 description={podcastDetails.trackExplicitness}
             />
-            <EpisodesList
-                episodes={podcastsEpisodes}
-                episodesLength={podcastDetails.trackCount}
-            />
+            {/* context pasando podcast details para pasarlos por props cuando navegue a la pestaña de episodio para no volver a hacer un fetch de los datos */}
+            <PodcastContext.Provider value={{ podcastDetails }}>
+                <EpisodesList
+                    episodes={podcastsEpisodes}
+                    episodesLength={podcastDetails.trackCount}
+                />
+            </PodcastContext.Provider>
         </section>
     )
 }

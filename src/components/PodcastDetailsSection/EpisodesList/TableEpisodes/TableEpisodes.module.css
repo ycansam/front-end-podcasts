@@ -1,0 +1,15 @@
+.tableEpisodes {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableEpisodes th {
+    border-bottom: 4px solid rgba(197, 197, 197, 0.622);
+    padding-bottom: 0.75rem;
+    padding: 1rem;
+    text-align: left;
+}
+
+.thTitle {
+    width: 70%;
+}
