@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import styles from './PodcastDetailsCard.module.css'
 
 type TPodcastDetailsCard = {
@@ -12,7 +12,7 @@ const PodcastDetailsCard: React.FC<TPodcastDetailsCard> = ({ image, name, artist
 
     return (
         <div className={styles.cardContainer}>
-            <img src={image}></img>
+            <img src={image} alt="imagen del podcast"></img>
             <div className={styles.containerTitles}>
                 <h1 className={styles.name}>{name}</h1>
                 <h2 className={styles.artist}>by {artist}</h2>

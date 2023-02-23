@@ -1,20 +1,26 @@
 import PodcastDetailsCard from '../PodcastDetailsCard/PodcastDetailsCard';
+import EpisodesList from './EpisodesList/EpisodesList';
 import styles from './PodcastDetailsSection.module.css'
 import PodcastDetailsHooks from './hooks/PodcastDetailsSection.hooks';
 import TPodcastDetails from '@/types/TPodcastDetails';
+import TPodcastEpisode from '@/types/TPodcastEpisode';
+
 type TPodcastDetailsSection = {
     podcastid: string;
 }
 
 type PodcastsListHooksReturn = {
     podcastDetails: TPodcastDetails;
-    isFetching: boolean;
+    podcastsEpisodes: TPodcastEpisode[];
+    isFetchingDetails: boolean;
+    isFetchingEpisodes: boolean;
 };
 
 const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }) => {
-    const { podcastDetails, isFetching }: PodcastsListHooksReturn = PodcastDetailsHooks(podcastid);
-    
-    if (isFetching)
+    const { podcastDetails, podcastsEpisodes, isFetchingDetails, isFetchingEpisodes }: PodcastsListHooksReturn = PodcastDetailsHooks(podcastid);
+    console.log(podcastDetails);
+
+    if (isFetchingDetails || isFetchingEpisodes)
         return <p>is loading...</p>
 
     return (
@@ -25,6 +31,7 @@ const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }) 
                 image={podcastDetails.artworkUrl600}
                 description={podcastDetails.trackExplicitness}
             />
+            <EpisodesList episodes={podcastsEpisodes} episodesLength={podcastDetails.trackCount} />
         </section>
     )
 }
