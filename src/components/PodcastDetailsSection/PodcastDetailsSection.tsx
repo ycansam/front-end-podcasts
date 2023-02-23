@@ -31,8 +31,8 @@ const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }) 
                 image={podcastDetails.artworkUrl600}
                 description={podcastDetails.trackExplicitness}
             />
-            {/* context pasando podcast details para pasarlos por props cuando navegue a la pestaña de episodio para no volver a hacer un fetch de los datos */}
-            <PodcastContext.Provider value={{ podcastDetails }}>
+            {/* context pasando el podcastid para poder hacer la navegacion */}
+            <PodcastContext.Provider value={{ podcastid }}>
                 <EpisodesList
                     episodes={podcastsEpisodes}
                     episodesLength={podcastDetails.trackCount}

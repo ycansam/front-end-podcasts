@@ -2,11 +2,12 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import Header from '@/components/Header/Header'
 import EpisodeDetialsSection from '@/components/EpisodeDetailsSection/EpisodeDetailsSection'
-
 const PodcastPage = () => {
+    
     const router = useRouter()
-    const episodeid = router.query.episodeid as string;
+    const { podcastid, episodeid } = router.query;
 
+    console.log({ podcastid, episodeid });
     if (episodeid)
         return (
             <div>
