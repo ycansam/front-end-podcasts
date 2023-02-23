@@ -12,9 +12,9 @@ const PodcastDetailsHooks = (podcastid: string) => {
         }).catch(err => {
             console.error(err)
         })
-            .finally(() => {
-                setIsFetching(false);
-            })
+        .finally(() => {
+            setIsFetching(false);
+        })
     }
 
     useEffect(() => {
