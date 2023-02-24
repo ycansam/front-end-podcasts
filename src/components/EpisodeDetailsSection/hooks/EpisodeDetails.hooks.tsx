@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import podcastsStorageService from "@/services/podcastsStorage.service";
 import TPodcast from "@/types/TPodcast";
+import TPodcastEpisode from "@/types/TPodcastEpisode";
+import TPodcastStorage from "@/types/TPodcastStorage";
 
 const EpisodeDetailsHooks: any = (episodeid: string) => {
 
@@ -8,19 +10,20 @@ const EpisodeDetailsHooks: any = (episodeid: string) => {
     const [episodeDetails, setEpisodeDetails] = useState<TPodcast | {}>();
     const [isFetchingPodcastDetails, setIsFetchingPodcastDetails] = useState<boolean>(true);
 
-    // funcion obtneida de los servicios de PodcastDetailsSection.
 
     const fetchStorageData = () => {
         const podcast = podcastsStorageService.getPodcastAndEpisodes();
         if (podcast) {
             setPodcastDetails(podcast.podcastDetails);
             // busca el episodio del array de episodios
-            setEpisodeDetails(podcast.episodes.find((episode) => {
-                return episode.trackId.toString() == episodeid;
-            }))
-
+            podcastsStorageService.findEpisodeOnPodcast(podcast, episodeid).then(episode => {
+                setEpisodeDetails(episode)
+            }).catch(err => {
+                console.error(err);
+            }).finally(() => {
+                setIsFetchingPodcastDetails(false);
+            });
         }
-        setIsFetchingPodcastDetails(false);
     }
 
     useEffect(() => {

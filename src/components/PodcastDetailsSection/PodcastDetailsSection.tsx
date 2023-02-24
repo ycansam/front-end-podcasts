@@ -23,6 +23,7 @@ const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }):
     if (isFetchingDetails || isFetchingEpisodes)
         return <p>is loading...</p>
 
+    //  si se ha obtenido el podcast correctamente se ejucataran las acciones
     podcastDetails && podcastsStorageService.savePodcastAndEpisodes1Day({ podcastDetails, episodes: podcastsEpisodes })
 
     return podcastDetails && (

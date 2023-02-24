@@ -18,10 +18,11 @@ type EpisodeDetailsHooksReturn = {
 const EpisodeDetialsSection: React.FC<TEpisodeDetailsSection> = ({ episodeid }) => {
 
     const { podcastDetails, isFetchingPodcastDetails, episodeDetails }: EpisodeDetailsHooksReturn = EpisodeDetailsHooks(episodeid);
+
     if (isFetchingPodcastDetails)
         return <p>...Loading</p>
 
-    return (
+    return episodeDetails && (
         <section className={styles.sectionContainer}>
             <PodcastDetailsCard
                 podcastid={podcastDetails.id.attributes['im:id']}
