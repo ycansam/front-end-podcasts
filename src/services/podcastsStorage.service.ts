@@ -93,6 +93,8 @@ class PodcastsStorageService {
         }
     }
 
+    // Comprueba que puede hacer fetch
+    // Solo puede hacer fetch si no existe el item o si ha pasado mas de 1 dia
     public checkIfCanFetchAllPodcasts(): TPodcast[] | any {
         const topPodcasts = this.getItemData(localStorageVariables.topPodcasts);
 
