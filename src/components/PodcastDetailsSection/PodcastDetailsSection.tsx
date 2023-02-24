@@ -31,7 +31,7 @@ const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }) 
     return (
         <section className={styles.sectionContainer}>
             <PodcastDetailsCard
-                podcastid={parseInt(podcastDetails.id.attributes['im:id'])}
+                podcastid={podcastDetails.id.attributes['im:id']}
                 name={podcastDetails['im:name'].label}
                 artist={podcastDetails['im:artist'].label}
                 image={podcastDetails['im:image'][2].label}
