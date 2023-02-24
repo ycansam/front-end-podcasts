@@ -24,9 +24,9 @@ const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }):
         return <p>is loading...</p>
 
     //  si se ha obtenido el podcast correctamente se ejucataran las acciones
-    podcastDetails && podcastsStorageService.savePodcastAndEpisodes1Day({ podcastDetails, episodes: podcastsEpisodes })
+    podcastsStorageService.savePodcastAndEpisodes1Day({ podcastDetails, episodes: podcastsEpisodes })
 
-    return podcastDetails && (
+    return (
         <section className={styles.sectionContainer}>
             <PodcastDetailsCard
                 podcastid={podcastDetails.id.attributes['im:id']}

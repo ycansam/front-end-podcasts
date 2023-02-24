@@ -23,16 +23,16 @@ const PodcastDetailsServices: any = (): TPocastDetailSersericesReturn => {
     const fetchPodcastDetails = async (podcastid: string, setState: Dispatch<SetStateAction<TPodcast>>, setFetching: Dispatch<SetStateAction<boolean>>) => {
 
         const resPodcast = await podcastsStorageService.getPodcast(podcastid) as TPodcast;
-
-        podcastsService.getPodcastDetails(podcastid).then(res => {
-            const podcast: TPodcastDetails = res.data.results[0];
-            resPodcast.trackCount = podcast.trackCount;
-            setState(resPodcast);
-        }).catch(err => {
-            console.error(err)
-        }).finally(() => {
-            setFetching(false);
-        })
+        if (resPodcast)
+            podcastsService.getPodcastDetails(podcastid).then(res => {
+                const podcast: TPodcastDetails = res.data.results[0];
+                resPodcast.trackCount = podcast.trackCount;
+                setState(resPodcast);
+            }).catch(err => {
+                console.error(err)
+            }).finally(() => {
+                setFetching(false);
+            })
     }
 
     const fetchPodcastEpisodes = (podcastid: string, setState: Dispatch<SetStateAction<TPodcastEpisode[]>>, setFetching: Dispatch<SetStateAction<boolean>>) => {

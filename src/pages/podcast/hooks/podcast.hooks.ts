@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import podcastsStorageService from '@/services/podcastsStorage.service'
 
 type TPodcastPageQuery = {
@@ -8,14 +8,15 @@ type TPodcastPageQuery = {
 
 const PodcastHooks: any = () => {
     const router = useRouter()
-    const [podcastNotFound, setNotFound] = useState<boolean>(false)
+    const [podcastFound, setFound] = useState<boolean>(false)
     const { podcastid } = router.query as TPodcastPageQuery;
 
     // comprueba que el podcast existe
     const checkIfNotExistsPodcast = () => {
-        podcastid && podcastsStorageService.getPodcast(podcastid)
+        podcastid && podcastsStorageService.getPodcast(podcastid).then(res => {
+            setFound(true)
+        })
             .catch(err => {
-                setNotFound(true);
                 console.error(err);
             })
     }
@@ -24,7 +25,9 @@ const PodcastHooks: any = () => {
         checkIfNotExistsPodcast();
     })
 
-    return { podcastNotFound, podcastid }
+
+
+    return { podcastFound, podcastid }
 }
 
 export default PodcastHooks;

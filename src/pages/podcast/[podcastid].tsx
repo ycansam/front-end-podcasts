@@ -4,10 +4,9 @@ import Head from 'next/head'
 import PodcastDetailsSection from '@/components/PodcastDetailsSection/PodcastDetailsSection'
 import PodcastHooks from './hooks/podcast.hooks'
 const PodcastPage = () => {
-    
-    const { podcastid, podcastNotFound } = PodcastHooks();
 
-    return podcastid && !podcastNotFound && (
+    const { podcastid, podcastFound } = PodcastHooks();
+    return podcastid && podcastFound && (
         <div>
             <Head>
                 <title>Podcaster - Podcast</title>

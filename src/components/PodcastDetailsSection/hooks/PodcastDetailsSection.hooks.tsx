@@ -22,6 +22,7 @@ const PodcastDetailsHooks: any = (podcastid: string) => {
 
     // Comprueba que ha pasado 1 dia antes de que vuelva a hacer la peticion
     const fetchDataByDayCondition = () => {
+
         const podcast: TPodcastStorage = podcastsStorageService.checkIfCanFetchPodcast(podcastid);
         // si ha devuelto falso significa que o no existe la variable o ha pasado mas de 1 dia por lo que puede hacer fetch
         if (!podcast) {
@@ -32,18 +33,8 @@ const PodcastDetailsHooks: any = (podcastid: string) => {
         }
     }
 
-    const checkIfPodcastExist = () => {
-        // Si encuentra el podcast procede a buscarlo
-        podcastsStorageService.getPodcast(podcastid).then(res => {
-            fetchDataByDayCondition();
-        }).catch(err => {
-            console.error(err);
-        }).finally(() => {
-        })
-    }
-
     useEffect(() => {
-        checkIfPodcastExist();
+        fetchDataByDayCondition();
     }, [])
 
     return { podcastDetails, isFetchingDetails, isFetchingEpisodes, podcastsEpisodes }
