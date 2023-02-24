@@ -105,7 +105,7 @@ class PodcastsStorageService {
         return false;
     }
 
-    public async getPodcast(podcastid: string): Promise<TPodcast | Error> {
+    public getPodcast(podcastid: string): Promise<TPodcast | Error> {
         const podcastsString: string = this.getItemData(localStorageVariables.topPodcasts);
         const podcasts: TPodcastArrayStorage = this.getParsedItem(podcastsString);
         const foundPodcast = podcasts.podcasts.find((podcast) => {
@@ -126,7 +126,7 @@ class PodcastsStorageService {
     }
 
     public findEpisodeOnPodcast = (podcast: TPodcastStorage, episodeid: string): Promise<TPodcastEpisode | Error> => {
-
+        console.log(episodeid);
         const episode = podcast.episodes.find((episode) => {
             return episode.trackId.toString() == episodeid;
         });

@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import podcastsStorageService from "@/services/podcastsStorage.service";
 import TPodcast from "@/types/TPodcast";
-import TPodcastEpisode from "@/types/TPodcastEpisode";
-import TPodcastStorage from "@/types/TPodcastStorage";
 
 const EpisodeDetailsHooks: any = (episodeid: string) => {
 
@@ -13,8 +11,10 @@ const EpisodeDetailsHooks: any = (episodeid: string) => {
 
     const fetchStorageData = () => {
         const podcast = podcastsStorageService.getPodcastAndEpisodes();
+        console.log(episodeid);
         if (podcast) {
             setPodcastDetails(podcast.podcastDetails);
+            
             // busca el episodio del array de episodios
             podcastsStorageService.findEpisodeOnPodcast(podcast, episodeid).then(episode => {
                 setEpisodeDetails(episode)

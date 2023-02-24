@@ -16,7 +16,7 @@ type EpisodeDetailsHooksReturn = {
 }
 
 const EpisodeDetialsSection: React.FC<TEpisodeDetailsSection> = ({ episodeid }) => {
-
+    console.log(episodeid);
     const { podcastDetails, isFetchingPodcastDetails, episodeDetails }: EpisodeDetailsHooksReturn = EpisodeDetailsHooks(episodeid);
 
     if (isFetchingPodcastDetails)
