@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styles from './PodcastDetailsCard.module.css'
 
 type TPodcastDetailsCard = {
-    podcastid: number;
+    podcastid: string;
     image: string;
     name: string;
     artist: string;

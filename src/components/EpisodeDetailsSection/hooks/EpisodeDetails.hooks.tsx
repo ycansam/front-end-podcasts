@@ -3,15 +3,17 @@ import PodcastDetailsServices from "@/components/PodcastDetailsSection/services/
 import TDetailsServicesReturn from "@/components/PodcastDetailsSection/types/TPodcastDetailsServicesReturn";
 import TPodcastDetails from "@/types/TPodcastDetails";
 import podcastsStorageService from "@/services/podcastsStorage.service";
+import TPodcast from "@/types/TPodcast";
 
 const EpisodeDetailsHooks: any = (podcastid: string, episodeid: string) => {
 
-    const [podcastDetails, setPodcastDetails] = useState<TPodcastDetails | {}>();
-    const [episodeDetails, setEpisodeDetails] = useState<TPodcastDetails | {}>();
+    const [podcastDetails, setPodcastDetails] = useState<TPodcast | {}>();
+    const [episodeDetails, setEpisodeDetails] = useState<TPodcast | {}>();
     const [isFetchingPodcastDetails, setIsFetchingPodcastDetails] = useState<boolean>(true);
 
     // funcion obtneida de los servicios de PodcastDetailsSection.
     const { fetchPodcastDetails }: TDetailsServicesReturn = PodcastDetailsServices();
+
     const fetchStorageData = () => {
         const podcast = podcastsStorageService.getPodcastAndEpisodes(podcastid);
         if (podcast) {

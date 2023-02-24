@@ -4,6 +4,7 @@ import PodcastDetailsCard from '../PodcastDetailsCard/PodcastDetailsCard'
 import TPodcastDetails from '@/types/TPodcastDetails'
 import EpisodeCard from './EpisodeCard/EpisodeCard'
 import TPodcastEpisode from '@/types/TPodcastEpisode'
+import TPodcast from '@/types/TPodcast'
 
 type TEpisodeDetailsSection = {
     episodeid: string;
@@ -11,7 +12,7 @@ type TEpisodeDetailsSection = {
 }
 
 type EpisodeDetailsHooksReturn = {
-    podcastDetails: TPodcastDetails;
+    podcastDetails: TPodcast;
     isFetchingPodcastDetails: boolean;
     episodeDetails: TPodcastEpisode;
 }
@@ -19,18 +20,17 @@ type EpisodeDetailsHooksReturn = {
 const EpisodeDetialsSection: React.FC<TEpisodeDetailsSection> = ({ podcastid, episodeid }) => {
 
     const { podcastDetails, isFetchingPodcastDetails, episodeDetails }: EpisodeDetailsHooksReturn = EpisodeDetailsHooks(podcastid, episodeid);
-    
     if (isFetchingPodcastDetails)
         return <p>...Loading</p>
-        
+
     return (
         <section className={styles.sectionContainer}>
             <PodcastDetailsCard
-                podcastid={podcastDetails.trackId}
-                name={podcastDetails.trackName}
-                artist={podcastDetails.artistName}
-                image={podcastDetails.artworkUrl600}
-                description={podcastDetails.trackExplicitness}
+                podcastid={podcastDetails.id.attributes['im:id']}
+                name={podcastDetails['im:name'].label}
+                artist={podcastDetails['im:artist'].label}
+                image={podcastDetails['im:image'][2].label}
+                description={podcastDetails.summary.label}
             />
             <EpisodeCard
                 title={episodeDetails.trackName}
