@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '@/styles/LandingPage.module.css'
 import Header from '@/components/Header/Header'
-import PodcastsSection from '@/components/PodcastsSection/PodcastsSection'
+import TopPodcastsSection from '@/components/TopPodcastsSection/TopPodcastsSection'
 export default function LandingPage() {
 
   return (
@@ -14,7 +14,7 @@ export default function LandingPage() {
       </Head>
       <main className={styles.main}>
         <Header />
-        <PodcastsSection />
+        <TopPodcastsSection />
       </main>
     </>
   )

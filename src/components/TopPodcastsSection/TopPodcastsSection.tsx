@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import styles from './PodcastsSection.module.css'
+import styles from './TopPodcastsSection.module.css'
 import PodcastsList from "./PodcastsList/PodcastsList"
 import FilterPodcasts from './FilterPodcasts/FilterPodcasts';
 import PodcastsListHooks from './PodcastsList/hooks/PodcastsList.hooks';
