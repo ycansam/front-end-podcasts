@@ -11,7 +11,8 @@ type TEpisodePageQuery = {
 
 const EpisodeHooks: any = () => {
     const router = useRouter()
-    const [anyNotFound, setAnyNotFound] = useState<boolean>(false)
+    const [podcastFound, setPodcastFound] = useState<boolean>(false)
+    const [episodeFound, setEpisodeFound] = useState<boolean>(false)
     const { episodeid } = router.query as TEpisodePageQuery;
     const { podcastid } = router.query as TEpisodePageQuery;
 
@@ -21,8 +22,8 @@ const EpisodeHooks: any = () => {
             // Si existe se buscara el episodio
             const podcast = podcastsStorageService.getPodcastAndEpisodes() as TPodcastStorage;
             checkIfNotExistEpisode(podcast);
+            setPodcastFound(true);
         }).catch(err => {
-            setAnyNotFound(true);
             console.error(err);
         })
     }
@@ -30,17 +31,17 @@ const EpisodeHooks: any = () => {
     // Comprueba que el episodio existe en el podcast
     const checkIfNotExistEpisode = (podcast: TPodcastStorage) => {
         podcastsStorageService.findEpisodeOnPodcast(podcast, episodeid).then(res => {
+            setEpisodeFound(true)
         }).catch(err => {
-            setAnyNotFound(true);
             console.error(err);
         })
     }
 
     useEffect(() => {
         checkIfNotExistsPodcast();
-    })
+    },[podcastid, episodeid])
 
-    return { anyNotFound, episodeid }
+    return { episodeFound, podcastFound, episodeid }
 }
 
 export default EpisodeHooks;

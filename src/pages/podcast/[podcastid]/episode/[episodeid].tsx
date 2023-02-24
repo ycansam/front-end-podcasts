@@ -6,15 +6,16 @@ import EpisodeHooks from './hooks/episode.hooks'
 
 type EpisodeHooksReturn = {
     episodeid: string;
-    anyNotFound: boolean;
+    podcastFound: boolean;
+    episodeFound: boolean;
 }
 
 const EpisodePage = () => {
 
-    const { episodeid, anyNotFound }: EpisodeHooksReturn = EpisodeHooks()
+    const { episodeid, podcastFound, episodeFound }: EpisodeHooksReturn = EpisodeHooks()
 
     // anyNotFound corresponde a podcast y episodio. Si uno de los dos no se encuentra, no se renderiza
-    return !anyNotFound && episodeid && (
+    return podcastFound && episodeFound && episodeid && (
         <div>
             <Head>
                 <title>Podcaster - Podcast Episode</title>

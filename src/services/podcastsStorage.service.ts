@@ -126,7 +126,6 @@ class PodcastsStorageService {
     }
 
     public findEpisodeOnPodcast = (podcast: TPodcastStorage, episodeid: string): Promise<TPodcastEpisode | Error> => {
-        console.log(episodeid);
         const episode = podcast.episodes.find((episode) => {
             return episode.trackId.toString() == episodeid;
         });

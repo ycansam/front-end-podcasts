@@ -6,6 +6,7 @@ import PodcastHooks from './hooks/podcast.hooks'
 const PodcastPage = () => {
 
     const { podcastid, podcastFound } = PodcastHooks();
+    
     return podcastid && podcastFound && (
         <div>
             <Head>

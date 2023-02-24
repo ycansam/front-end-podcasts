@@ -9,12 +9,11 @@ const EpisodeDetailsHooks: any = (episodeid: string) => {
     const [isFetchingPodcastDetails, setIsFetchingPodcastDetails] = useState<boolean>(true);
 
 
-    const fetchStorageData = () => {
+    const fetchPodcastAndEpisodes = () => {
         const podcast = podcastsStorageService.getPodcastAndEpisodes();
-        console.log(episodeid);
         if (podcast) {
             setPodcastDetails(podcast.podcastDetails);
-            
+
             // busca el episodio del array de episodios
             podcastsStorageService.findEpisodeOnPodcast(podcast, episodeid).then(episode => {
                 setEpisodeDetails(episode)
@@ -27,7 +26,7 @@ const EpisodeDetailsHooks: any = (episodeid: string) => {
     }
 
     useEffect(() => {
-        fetchStorageData();
+        fetchPodcastAndEpisodes();
     }, [])
 
     return { podcastDetails, isFetchingPodcastDetails, episodeDetails }
