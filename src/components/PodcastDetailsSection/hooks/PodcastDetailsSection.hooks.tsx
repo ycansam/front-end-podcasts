@@ -4,6 +4,7 @@ import TPodcastEpisode from "@/types/TPodcastEpisode";
 import TDetailsServicesReturn from "../types/TPodcastDetailsServicesReturn";
 import podcastsStorageService from "@/services/podcastsStorage.service";
 import TPodcastStorage from "@/types/TPodcastStorage";
+
 const PodcastDetailsHooks: any = (podcastid: string) => {
 
     const [podcastDetails, setPodcastDetails] = useState({});
@@ -12,6 +13,13 @@ const PodcastDetailsHooks: any = (podcastid: string) => {
     const [isFetchingEpisodes, setIsFetchingEpisodes] = useState<boolean>(true);
     const { fetchPodcastDetails, fetchPodcastEpisodes }: TDetailsServicesReturn = PodcastDetailsServices();
 
+    const setPodcastPodcastEnEpisodeDetails = (podcast: TPodcastStorage) => {
+        setPodcastDetails(podcast.podcastDetails);
+        setPodcastEpisodes(podcast.episodes);
+        setIsFetchingDetails(false);
+        setIsFetchingEpisodes(false);
+    }
+
     const fetchDataByDayCondition = () => {
         const podcast: TPodcastStorage = podcastsStorageService.checkIfCanFetchPodcast(podcastid);
         // si ha devuelto falso significa que o no existe la variable o ha pasado mas de 1 dia por lo que puede hacer fetch
@@ -19,12 +27,10 @@ const PodcastDetailsHooks: any = (podcastid: string) => {
             fetchPodcastDetails(podcastid, setPodcastDetails, setIsFetchingDetails);
             fetchPodcastEpisodes(podcastid, setPodcastEpisodes, setIsFetchingEpisodes);
         } else {
-            setPodcastDetails(podcast.podcastDetails);
-            setPodcastEpisodes(podcast.episodes);
-            setIsFetchingDetails(false);
-            setIsFetchingEpisodes(false);
+            setPodcastPodcastEnEpisodeDetails(podcast);
         }
     }
+
     useEffect(() => {
         fetchDataByDayCondition();
     }, [])

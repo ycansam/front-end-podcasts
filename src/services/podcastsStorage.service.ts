@@ -61,7 +61,7 @@ class PodcastsStorageService {
 
     // Consulta si puede hacer un nuevo fetch a los datos
     public checkIfCanFetchPodcast(podcastId: string): TPodcastStorage | any {
-        const podcaststring = this.getItemData(podcastId);
+        const podcaststring = this.getItemData(localStorageVariables.podcastDetails);
         // si existe el podcast almacenado comprueba que ha pasado 1 dia. 
         // devuelve true si ha pasado mas de 1 dia por lo que puede almacenar la variable
         // devuelve false si todavia no ha pasado 1 dia;
@@ -71,11 +71,9 @@ class PodcastsStorageService {
             // si el podcast que esta guardado es el mismo
             if (podcast.podcastDetails.id.attributes["im:id"] == podcastId) {
                 if (podcast && (currentTime - podcast.saved_at) < 24 * 60 * 60 * 1000) {
-                    console.log("a");
                     return podcast;
                 }
             }
-
 
             return false;
         }
