@@ -2,7 +2,6 @@ import Head from 'next/head'
 import styles from '@/styles/LandingPage.module.css'
 import Header from '@/components/Header/Header'
 import PodcastsSection from '@/components/PodcastsSection/PodcastsSection'
-
 export default function LandingPage() {
 
   return (

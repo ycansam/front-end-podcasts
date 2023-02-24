@@ -1,5 +1,24 @@
-.mainContainer {
+.containerEpisode {
     width: 72.5%;
     margin-left: 2rem;
+    margin-bottom: 0.3rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem 1.25rem;
+    height: fit-content;
+}
+
+.divTexts {
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid rgb(245, 245, 245);
+}
+
+.title {
     margin-bottom: 1rem;
+}
+
+.description {
+    font-style: italic;
+    line-height: 1.5;
 }

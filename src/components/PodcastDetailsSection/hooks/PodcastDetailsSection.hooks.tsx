@@ -13,26 +13,23 @@ const PodcastDetailsHooks: any = (podcastid: string) => {
     const [hasFetchedDataByOneDay, setHasFetchedDataByOneDay] = useState<boolean>(false);
     const { fetchPodcastDetails, fetchPodcastEpisodes }: TDetailsServicesReturn = PodcastDetailsServices();
 
-
     const fetchDataByDayCondition = () => {
         const podcast: TPodcastStorage = podcastsStorageService.checkIfCanFetchPodcast(podcastid);
+        // si ha devuelto falso significa que o no existe la variable o ha pasado mas de 1 dia por lo que puede hacer fetch
         if (!podcast) {
             fetchPodcastDetails(podcastid, setPodcastDetails, setIsFetchingDetails);
             fetchPodcastEpisodes(podcastid, setPodcastEpisodes, setIsFetchingEpisodes);
             setHasFetchedDataByOneDay(true);
         } else {
-            console.log(podcast);
             setPodcastDetails(podcast.podcastDetails);
             setPodcastEpisodes(podcast.episodes);
             setIsFetchingDetails(false);
             setIsFetchingEpisodes(false);
         }
     }
-
     useEffect(() => {
         fetchDataByDayCondition();
     }, [])
-
 
     return { podcastDetails, isFetchingDetails, isFetchingEpisodes, podcastsEpisodes, hasFetchedDataByOneDay }
 }

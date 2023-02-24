@@ -32,6 +32,14 @@ class PodcastsStorageService {
 
     }
 
+    public getPodcastAndEpisodes(podcastId: string) {
+        const podcaststring = localStorage.getItem(podcastId) as string;
+        if (podcaststring !== null) {
+            const podcast: TPodcastStorage = JSON.parse(podcaststring as string)
+            return podcast;
+        }
+    }
+
 }
 
 const podcastsStorageService = new PodcastsStorageService();

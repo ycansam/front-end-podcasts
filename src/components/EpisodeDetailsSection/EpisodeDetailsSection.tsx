@@ -3,6 +3,7 @@ import EpisodeDetailsHooks from './hooks/EpisodeDetails.hooks'
 import PodcastDetailsCard from '../PodcastDetailsCard/PodcastDetailsCard'
 import TPodcastDetails from '@/types/TPodcastDetails'
 import EpisodeCard from './EpisodeCard/EpisodeCard'
+import TPodcastEpisode from '@/types/TPodcastEpisode'
 
 type TEpisodeDetailsSection = {
     episodeid: string;
@@ -12,15 +13,15 @@ type TEpisodeDetailsSection = {
 type EpisodeDetailsHooksReturn = {
     podcastDetails: TPodcastDetails;
     isFetchingPodcastDetails: boolean;
+    episodeDetails: TPodcastEpisode;
 }
 
 const EpisodeDetialsSection: React.FC<TEpisodeDetailsSection> = ({ podcastid, episodeid }) => {
 
-    const { podcastDetails, isFetchingPodcastDetails }: EpisodeDetailsHooksReturn = EpisodeDetailsHooks(podcastid, episodeid);
+    const { podcastDetails, isFetchingPodcastDetails, episodeDetails }: EpisodeDetailsHooksReturn = EpisodeDetailsHooks(podcastid, episodeid);
 
     if (isFetchingPodcastDetails)
         return <p>...Loading</p>
-
     return (
         <section className={styles.sectionContainer}>
             <PodcastDetailsCard
@@ -29,7 +30,11 @@ const EpisodeDetialsSection: React.FC<TEpisodeDetailsSection> = ({ podcastid, ep
                 image={podcastDetails.artworkUrl600}
                 description={podcastDetails.trackExplicitness}
             />
-            <EpisodeCard episode={""}/>
+            <EpisodeCard
+                title={episodeDetails.trackName}
+                description={episodeDetails.description}
+                audiourl={episodeDetails.episodeUrl}
+            />
 
         </section>
     )
