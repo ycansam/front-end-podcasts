@@ -30,7 +30,7 @@ const PodcastsSection: React.FC = () => {
 
     if (isFetching)
         return <p>is loading...</p>
-
+     
     return (
         <section className={styles.sectionContainer}>
 

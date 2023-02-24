@@ -7,7 +7,6 @@ type TPodcastsArray = {
 }
 
 const PodcastsList: React.FC<TPodcastsArray> = ({ podcasts }) => {
-
     return (
         <ul className={styles.ulPodcasts}>
             {/* Genera un PodcastViewLink por cada uno de los podcast del array */}

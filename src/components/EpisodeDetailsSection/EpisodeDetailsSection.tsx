@@ -19,7 +19,6 @@ type EpisodeDetailsHooksReturn = {
 const EpisodeDetialsSection: React.FC<TEpisodeDetailsSection> = ({ podcastid, episodeid }) => {
 
     const { podcastDetails, isFetchingPodcastDetails, episodeDetails }: EpisodeDetailsHooksReturn = EpisodeDetailsHooks(podcastid, episodeid);
-    console.log(podcastDetails);
     if (isFetchingPodcastDetails)
         return <p>...Loading</p>
     return (
