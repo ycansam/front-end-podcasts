@@ -57,7 +57,6 @@ class PodcastsStorageService {
                 console.error(err);
             }
         else {
-            console.log("a");
             this.saveItem(localStorageVariables.podcastDetails, { podcastDetails, episodes, saved_at: Date.now() });
         }
     }

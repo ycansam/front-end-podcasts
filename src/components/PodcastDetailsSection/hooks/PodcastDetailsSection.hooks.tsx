@@ -35,6 +35,7 @@ const PodcastDetailsHooks: any = (podcastid: string) => {
 
     useEffect(() => {
         fetchDataByDayCondition();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return { podcastDetails, isFetchingDetails, isFetchingEpisodes, podcastsEpisodes }

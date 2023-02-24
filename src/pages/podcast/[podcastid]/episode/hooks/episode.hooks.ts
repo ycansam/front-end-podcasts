@@ -9,7 +9,7 @@ type TEpisodePageQuery = {
     episodeid: string;
 }
 
-const EpisodeHooks: any = () => {
+const EpisodeHooks = () => {
     const router = useRouter()
     const [podcastFound, setPodcastFound] = useState<boolean>(false)
     const [episodeFound, setEpisodeFound] = useState<boolean>(false)
@@ -39,9 +39,10 @@ const EpisodeHooks: any = () => {
 
     useEffect(() => {
         checkIfNotExistsPodcast();
-    },[podcastid, episodeid])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [podcastid, episodeid])
 
-    return { episodeFound, podcastFound, episodeid }
+    return ([episodeFound, podcastFound, episodeid])
 }
 
 export default EpisodeHooks;

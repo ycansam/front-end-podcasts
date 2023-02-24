@@ -5,6 +5,7 @@ import TopPodcastsSection from '@/components/TopPodcastsSection/TopPodcastsSecti
 import HeaderHooks from '@/components/Header/hooks/Header.hooks';
 import HeaderContext from '@/components/Header/context/Header.context';
 import React from 'react';
+
 export default function LandingPage() {
   const { isLoading, setIsLoading } = HeaderHooks();
   return (

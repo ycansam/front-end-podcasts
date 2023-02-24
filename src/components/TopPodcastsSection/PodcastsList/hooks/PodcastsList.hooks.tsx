@@ -41,6 +41,7 @@ const PodcastsListHooks: any = () => {
             setIsFetching(false);
         }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return { podcasts, isFetching }

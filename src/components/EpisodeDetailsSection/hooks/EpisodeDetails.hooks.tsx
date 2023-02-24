@@ -27,6 +27,7 @@ const EpisodeDetailsHooks: any = (episodeid: string) => {
 
     useEffect(() => {
         fetchPodcastAndEpisodes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return { podcastDetails, isFetchingPodcastDetails, episodeDetails }
