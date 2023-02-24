@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import PodcastDetailsServices from "@/components/PodcastDetailsSection/services/PodcastDetails.service";
-import TDetailsServicesReturn from "@/components/PodcastDetailsSection/types/TPodcastDetailsServicesReturn";
 import podcastsStorageService from "@/services/podcastsStorage.service";
 import TPodcast from "@/types/TPodcast";
 
-const EpisodeDetailsHooks: any = (podcastid: string, episodeid: string) => {
+const EpisodeDetailsHooks: any = (episodeid: string) => {
 
     const [podcastDetails, setPodcastDetails] = useState<TPodcast | {}>();
     const [episodeDetails, setEpisodeDetails] = useState<TPodcast | {}>();
@@ -20,7 +18,7 @@ const EpisodeDetailsHooks: any = (podcastid: string, episodeid: string) => {
             setEpisodeDetails(podcast.episodes.find((episode) => {
                 return episode.trackId.toString() == episodeid;
             }))
-            
+
         }
         setIsFetchingPodcastDetails(false);
     }

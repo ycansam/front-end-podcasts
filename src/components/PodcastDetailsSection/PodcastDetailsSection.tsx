@@ -34,11 +34,10 @@ const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }) 
                 image={podcastDetails['im:image'][2].label}
                 description={podcastDetails.summary.label}
             />
-            {/* context pasando el podcastid para poder hacer la navegacion */}
-            <PodcastContext.Provider value={{ podcastid }}>
+            {/* context pasando el podcastid para poder hacer la navegacion y no tener que crear muchos router para obtener el parametro*/}
+            <PodcastContext.Provider value={{ podcastid, episodesLength: podcastDetails.trackCount }}>
                 <EpisodesContainer
                     episodes={podcastsEpisodes}
-                    episodesLength={podcastDetails.trackCount}
                 />
             </PodcastContext.Provider>
         </section>

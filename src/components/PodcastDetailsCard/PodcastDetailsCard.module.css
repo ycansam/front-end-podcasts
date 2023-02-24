@@ -43,3 +43,10 @@
     font-weight: 400;
     font-style: italic;
 }
+.descriptionTitle{
+    margin-bottom: 0.75rem;
+}
+.description{
+    font-style: italic;
+    line-height: 1.5;
+}

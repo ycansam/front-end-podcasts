@@ -1,3 +1,4 @@
+import dateUtils from '@/utils/date.utils';
 import styles from './AudioPlayer.module.css'
 import AudioPlayerHooks from './hooks/AudioPlayer.hooks';
 type TAudioPlayer = {
@@ -6,7 +7,6 @@ type TAudioPlayer = {
 
 type TAudioPlayerHooks = {
     handleMuteToggle: () => void;
-    formatTime: (time: number) => string;
     handleProgressClick: (event: React.MouseEvent<HTMLDivElement>) => void;
     handleDurationChange: () => void;
     handleTimeUpdate: () => void;
@@ -23,7 +23,6 @@ const AudioPlayer: React.FC<TAudioPlayer> = ({ audiourl }) => {
 
     const {
         handleMuteToggle,
-        formatTime,
         handleProgressClick,
         handleDurationChange,
         handleTimeUpdate,
@@ -69,7 +68,7 @@ const AudioPlayer: React.FC<TAudioPlayer> = ({ audiourl }) => {
                     />
                 </div>
             </div>
-            <span>{formatTime(currentTime)}</span>
+            <span>{dateUtils.parseMillisToMinutesSeconds(currentTime)}</span>
             <button onClick={handleMuteToggle}><i className={isMuted ? 'bi bi-volume-mute-fill' : 'bi bi-volume-down-fill'}></i></button>
         </div>
     </div>

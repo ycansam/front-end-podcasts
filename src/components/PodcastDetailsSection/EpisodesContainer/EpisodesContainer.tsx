@@ -1,19 +1,17 @@
 import styles from './EpisodesContainer.module.css'
 import TPodcastEpisode from '@/types/TPodcastEpisode'
 import TableEpisodes from './TableEpisodes/TableEpisodes';
+import EpisodesHeader from './EpisodesHeader/EpisodesHeader';
 
-type TEpisodesArray = {
+type TEpisodesContainer = {
     episodes: TPodcastEpisode[];
-    episodesLength: number;
 }
 
-const EpisodesList: React.FC<TEpisodesArray> = ({ episodes, episodesLength }) => {
+const EpisodesContainer: React.FC<TEpisodesContainer> = ({ episodes }) => {
 
     return (
         <div className={styles.mainContainer}>
-            <header>
-                <h1>Episodes: {episodesLength}</h1>
-            </header>
+            <EpisodesHeader />
             <div className={styles.containerTable}>
                 <TableEpisodes episodes={episodes} />
             </div>
@@ -21,5 +19,5 @@ const EpisodesList: React.FC<TEpisodesArray> = ({ episodes, episodesLength }) =>
     )
 }
 
-export default EpisodesList;
+export default EpisodesContainer;
 

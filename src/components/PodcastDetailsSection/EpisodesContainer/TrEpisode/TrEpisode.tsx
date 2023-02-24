@@ -4,19 +4,17 @@ import { useContext } from "react";
 import PodcastContext from "../../contexts/PodcastDetailsSection.context";
 import dateUtils from "@/utils/date.utils";
 import TPodcastEpisode from "@/types/TPodcastEpisode";
+import TPodcastContext from '../../types/TPodcastContext';
 
 type TTrEpisode = {
     index: number;
     episode: TPodcastEpisode;
 }
-type TContextPodcastDetails = {
-    podcastid: string;
-}
 
 // Componente fila individual para cada uno de los episodios
 const TrEpisode: React.FC<TTrEpisode> = ({ index, episode: { trackId, trackName, trackTimeMillis, releaseDate } }) => {
 
-    const { podcastid } = useContext(PodcastContext) as TContextPodcastDetails;
+    const { podcastid } = useContext(PodcastContext) as TPodcastContext;
 
     // Si es impar el fondo es mas oscuro
     const isOdd = index % 2 && styles.oddBackgroundColorRowEpisode;

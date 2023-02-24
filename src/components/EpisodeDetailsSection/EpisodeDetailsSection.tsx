@@ -1,14 +1,12 @@
 import styles from './EpisodeDetailsSection.module.css'
 import EpisodeDetailsHooks from './hooks/EpisodeDetails.hooks'
 import PodcastDetailsCard from '../PodcastDetailsCard/PodcastDetailsCard'
-import TPodcastDetails from '@/types/TPodcastDetails'
 import EpisodeCard from './EpisodeCard/EpisodeCard'
 import TPodcastEpisode from '@/types/TPodcastEpisode'
 import TPodcast from '@/types/TPodcast'
 
 type TEpisodeDetailsSection = {
     episodeid: string;
-    podcastid: string;
 }
 
 type EpisodeDetailsHooksReturn = {
@@ -17,9 +15,9 @@ type EpisodeDetailsHooksReturn = {
     episodeDetails: TPodcastEpisode;
 }
 
-const EpisodeDetialsSection: React.FC<TEpisodeDetailsSection> = ({ podcastid, episodeid }) => {
+const EpisodeDetialsSection: React.FC<TEpisodeDetailsSection> = ({ episodeid }) => {
 
-    const { podcastDetails, isFetchingPodcastDetails, episodeDetails }: EpisodeDetailsHooksReturn = EpisodeDetailsHooks(podcastid, episodeid);
+    const { podcastDetails, isFetchingPodcastDetails, episodeDetails }: EpisodeDetailsHooksReturn = EpisodeDetailsHooks(episodeid);
     if (isFetchingPodcastDetails)
         return <p>...Loading</p>
 

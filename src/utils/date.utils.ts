@@ -22,6 +22,11 @@ class DateUtils {
         return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
     }
 
+    public parseMillisToMinutesSeconds(milliseconds: number): string {
+        const minutes = Math.floor(milliseconds / 60);
+        const seconds = Math.floor(milliseconds % 60);
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
 }
 
 const dateUtils = new DateUtils();

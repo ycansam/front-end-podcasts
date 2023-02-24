@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 
 const AudioPlayerHooks: any = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -25,19 +25,16 @@ const AudioPlayerHooks: any = () => {
         setDuration(audioRef.current.duration);
     };
 
-    const handleProgressClick = (event: React.MouseEvent<HTMLDivElement>) => {
-        const progressWidth = progressRef.current?.clientWidth ?? 0;
-        const clickedPosition = event.nativeEvent.offsetX;
-        const percent = clickedPosition / progressWidth;
-        const newTime = percent * duration;
-        audioRef.current.currentTime = newTime;
-    };
-
-    const formatTime = (time: number) => {
-        const minutes = Math.floor(time / 60);
-        const seconds = Math.floor(time % 60);
-        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-    };
+    const handleProgressClick = useCallback(
+        (event: React.MouseEvent<HTMLDivElement>) => {
+            const progressWidth = progressRef.current?.clientWidth ?? 0;
+            const clickedPosition = event.nativeEvent.offsetX;
+            const percent = clickedPosition / progressWidth;
+            const newTime = percent * duration;
+            audioRef.current.currentTime = newTime;
+        },
+        [duration]
+    );
 
     const handleMuteToggle = () => {
         setIsMuted(!isMuted);
@@ -46,7 +43,6 @@ const AudioPlayerHooks: any = () => {
 
     return {
         handleMuteToggle,
-        formatTime,
         handleProgressClick,
         handleDurationChange,
         handleTimeUpdate,

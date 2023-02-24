@@ -11,7 +11,7 @@ type TEpisodePageQuery = {
 const EpisodePage = () => {
 
     const router = useRouter()
-    const { podcastid, episodeid } = router.query as TEpisodePageQuery;
+    const { episodeid } = router.query as TEpisodePageQuery;
 
     if (episodeid)
         return (
@@ -20,7 +20,7 @@ const EpisodePage = () => {
                     <title>Podcaster - Podcast Episode</title>
                 </Head>
                 <Header />
-                <EpisodeDetialsSection episodeid={episodeid} podcastid={podcastid} />
+                <EpisodeDetialsSection episodeid={episodeid} />
             </div>
         )
 }
