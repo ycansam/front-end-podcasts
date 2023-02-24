@@ -6,7 +6,7 @@ export default function LandingPage() {
 
   return (
     <>
-      <Head>
+      <Head >
         <title>Podcaster</title>
         <meta name="description" content="Pagina web de podcasts de apple" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
