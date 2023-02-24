@@ -31,8 +31,18 @@ const PodcastDetailsHooks: any = (podcastid: string) => {
         }
     }
 
+    const checkIfPodcastExist = () => {
+        // Si encuentra el podcast procede a buscarlo
+        podcastsStorageService.getPodcast(podcastid).then(res => {
+            fetchDataByDayCondition();
+        }).catch(err => {
+            console.error(err);
+        }).finally(() => {
+        })
+    }
+
     useEffect(() => {
-        fetchDataByDayCondition();
+        checkIfPodcastExist();
     }, [])
 
     return { podcastDetails, isFetchingDetails, isFetchingEpisodes, podcastsEpisodes }

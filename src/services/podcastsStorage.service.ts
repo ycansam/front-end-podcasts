@@ -62,6 +62,7 @@ class PodcastsStorageService {
     // Consulta si puede hacer un nuevo fetch a los datos
     public checkIfCanFetchPodcast(podcastId: string): TPodcastStorage | any {
         const podcaststring = this.getItemData(localStorageVariables.podcastDetails);
+        
         // si existe el podcast almacenado comprueba que ha pasado 1 dia. 
         // devuelve true si ha pasado mas de 1 dia por lo que puede almacenar la variable
         // devuelve false si todavia no ha pasado 1 dia;
@@ -104,13 +105,15 @@ class PodcastsStorageService {
         return false;
     }
 
-    public getPodcast(podcastid: string): TPodcast {
+    public async getPodcast(podcastid: string): Promise<TPodcast | Error> {
         const podcastsString: string = this.getItemData(localStorageVariables.topPodcasts);
         const podcasts: TPodcastArrayStorage = this.getParsedItem(podcastsString);
-        return podcasts.podcasts.find((podcast) => {
+        const foundPodcast = podcasts.podcasts.find((podcast) => {
             return podcast.id.attributes["im:id"] === podcastid;
         }) as TPodcast;
-
+        if (foundPodcast)
+            return Promise.resolve(foundPodcast);
+        return Promise.reject(new Error("Podcast no encontrado"))
     }
 
 

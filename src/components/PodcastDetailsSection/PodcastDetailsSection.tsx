@@ -17,15 +17,15 @@ type PodcastsListHooksReturn = {
     isFetchingEpisodes: boolean;
 };
 
-const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }) => {
+const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }): JSX.Element => {
     const { podcastDetails, podcastsEpisodes, isFetchingDetails, isFetchingEpisodes }: PodcastsListHooksReturn = PodcastDetailsHooks(podcastid);
 
     if (isFetchingDetails || isFetchingEpisodes)
         return <p>is loading...</p>
 
-    podcastsStorageService.savePodcastAndEpisodes1Day({ podcastDetails, episodes: podcastsEpisodes })
+    podcastDetails && podcastsStorageService.savePodcastAndEpisodes1Day({ podcastDetails, episodes: podcastsEpisodes })
 
-    return (
+    return podcastDetails && (
         <section className={styles.sectionContainer}>
             <PodcastDetailsCard
                 podcastid={podcastDetails.id.attributes['im:id']}
@@ -42,6 +42,7 @@ const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }) 
             </PodcastContext.Provider>
         </section>
     )
+
 }
 
 export default PodcastDetailsSection;
