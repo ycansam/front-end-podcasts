@@ -44,7 +44,7 @@ Dirigirse al directorio del proyecto
 Para ejecutar la aplicación en modo de desarrollo, abra una terminal y ejecute los siguientes comandos:
 ```bash
 npm install
-npm run build
+npm run dev
 ```
 
 ### Build
