@@ -1,8 +1,7 @@
-import TPodcastDetails from "./TPodcastDetails";
 import TPodcastEpisode from "./TPodcastEpisode";
-
+import TPodcast from "./TPodcast";
 type TPodcastStorage = {
-    podcastDetails: TPodcastDetails;
+    podcastDetails: TPodcast;
     episodes: TPodcastEpisode[],
     saved_at: number; // millis
 }

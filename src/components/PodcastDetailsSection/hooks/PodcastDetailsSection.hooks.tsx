@@ -10,7 +10,6 @@ const PodcastDetailsHooks: any = (podcastid: string) => {
     const [podcastsEpisodes, setPodcastEpisodes] = useState<TPodcastEpisode[]>([]);
     const [isFetchingDetails, setIsFetchingDetails] = useState<boolean>(true);
     const [isFetchingEpisodes, setIsFetchingEpisodes] = useState<boolean>(true);
-    const [hasFetchedDataByOneDay, setHasFetchedDataByOneDay] = useState<boolean>(false);
     const { fetchPodcastDetails, fetchPodcastEpisodes }: TDetailsServicesReturn = PodcastDetailsServices();
 
     const fetchDataByDayCondition = () => {
@@ -19,7 +18,6 @@ const PodcastDetailsHooks: any = (podcastid: string) => {
         if (!podcast) {
             fetchPodcastDetails(podcastid, setPodcastDetails, setIsFetchingDetails);
             fetchPodcastEpisodes(podcastid, setPodcastEpisodes, setIsFetchingEpisodes);
-            setHasFetchedDataByOneDay(true);
         } else {
             setPodcastDetails(podcast.podcastDetails);
             setPodcastEpisodes(podcast.episodes);
@@ -31,7 +29,7 @@ const PodcastDetailsHooks: any = (podcastid: string) => {
         fetchDataByDayCondition();
     }, [])
 
-    return { podcastDetails, isFetchingDetails, isFetchingEpisodes, podcastsEpisodes, hasFetchedDataByOneDay }
+    return { podcastDetails, isFetchingDetails, isFetchingEpisodes, podcastsEpisodes }
 }
 
 export default PodcastDetailsHooks;

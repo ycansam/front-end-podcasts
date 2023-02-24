@@ -1,10 +1,16 @@
 import TPodcast from "@/types/TPodcast";
+import TPodcastEpisode from "@/types/TPodcastEpisode";
 import TPodcastStorage from "@/types/TPodcastStorage";
 import TPodcastArrayStorage from "@/types/TPodcastsStorage";
 
 const localStorageVariables = {
     topPodcasts: "top-podcasts",
     podcastDetails: "podcast-details"
+}
+
+type SavePodcastAndEpisodes = {
+    podcastDetails: TPodcast;
+    episodes: TPodcastEpisode[];
 }
 
 class PodcastsStorageService {
@@ -28,12 +34,28 @@ class PodcastsStorageService {
     }
 
     // Guarda un podcast y sus episodios durante 1 dia
-    public savePodcastAndEpisodes1Day(podcastId: string, { podcastDetails, episodes }: any): void {
-        try {
-            this.saveItem(podcastId, { podcastDetails, episodes, saved_at: Date.now() });
-            // Almacenar la información
-        } catch (err) {
-            console.error(err);
+    public savePodcastAndEpisodes1Day({ podcastDetails, episodes }: SavePodcastAndEpisodes): void {
+        const podcaststring = this.getItemData(localStorageVariables.podcastDetails);
+        if (podcaststring)
+            try {
+                const podcast: TPodcastStorage = this.getParsedItem(podcaststring);
+                const currentTime = Date.now();
+
+                // Si es el mismo podcast y ha pasado mas de 1 dia se vuelve a guardar
+                if (podcast.podcastDetails.id.attributes["im:id"] === podcastDetails.id.attributes["im:id"]) {
+                    if (!podcast || (currentTime - podcast.saved_at) > 24 * 60 * 60 * 1000) {
+                        this.saveItem(localStorageVariables.podcastDetails, { podcastDetails, episodes, saved_at: Date.now() });
+                    }
+                } else {
+                    // si el podcast es diferente se guarda automaticamente
+                    this.saveItem(localStorageVariables.podcastDetails, { podcastDetails, episodes, saved_at: Date.now() });
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        else {
+            console.log("a");
+            this.saveItem(localStorageVariables.podcastDetails, { podcastDetails, episodes, saved_at: Date.now() });
         }
     }
 
@@ -46,10 +68,15 @@ class PodcastsStorageService {
         if (podcaststring !== null) {
             const currentTime = Date.now();
             const podcast: TPodcastStorage = this.getParsedItem(podcaststring);
-            // console.log(podcast);
-            if (podcast && (currentTime - podcast.saved_at) < 24 * 60 * 60 * 1000) {
-                return podcast;
+            // si el podcast que esta guardado es el mismo
+            if (podcast.podcastDetails.id.attributes["im:id"] == podcastId) {
+                if (podcast && (currentTime - podcast.saved_at) < 24 * 60 * 60 * 1000) {
+                    console.log("a");
+                    return podcast;
+                }
             }
+
+
             return false;
         }
         return false;
@@ -57,8 +84,8 @@ class PodcastsStorageService {
     }
 
     // Obtiene un podcast y sus episodios
-    public getPodcastAndEpisodes(podcastId: string): TPodcastStorage | undefined {
-        const podcaststring = this.getItemData(podcastId);
+    public getPodcastAndEpisodes(): TPodcastStorage | undefined {
+        const podcaststring = this.getItemData(localStorageVariables.podcastDetails);
         if (podcaststring !== null) {
             const podcast: TPodcastStorage = this.getParsedItem(podcaststring);
             return podcast;

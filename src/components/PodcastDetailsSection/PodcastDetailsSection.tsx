@@ -15,18 +15,15 @@ type PodcastsListHooksReturn = {
     podcastsEpisodes: TPodcastEpisode[];
     isFetchingDetails: boolean;
     isFetchingEpisodes: boolean;
-    hasFetchedDataByOneDay: boolean; // si se ha hecho fetch lo que significa que ha pasado 1 dia o la variable existia se guardaran los nuevos datos
 };
 
 const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }) => {
-    const { podcastDetails, podcastsEpisodes, isFetchingDetails, isFetchingEpisodes, hasFetchedDataByOneDay }: PodcastsListHooksReturn = PodcastDetailsHooks(podcastid);
+    const { podcastDetails, podcastsEpisodes, isFetchingDetails, isFetchingEpisodes }: PodcastsListHooksReturn = PodcastDetailsHooks(podcastid);
 
     if (isFetchingDetails || isFetchingEpisodes)
         return <p>is loading...</p>
 
-    if (hasFetchedDataByOneDay) {
-        podcastsStorageService.savePodcastAndEpisodes1Day(podcastDetails.id.attributes['im:id'].toString(), { podcastDetails, episodes: podcastsEpisodes })
-    }
+    podcastsStorageService.savePodcastAndEpisodes1Day({ podcastDetails, episodes: podcastsEpisodes })
 
     return (
         <section className={styles.sectionContainer}>

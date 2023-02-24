@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import styles from './PodcastsSection.module.css'
 import PodcastsList from "./PodcastsList/PodcastsList"
 import FilterPodcasts from './FilterPodcasts/FilterPodcasts';
@@ -30,7 +30,7 @@ const PodcastsSection: React.FC = () => {
 
     if (isFetching)
         return <p>is loading...</p>
-     
+
     return (
         <section className={styles.sectionContainer}>
 
