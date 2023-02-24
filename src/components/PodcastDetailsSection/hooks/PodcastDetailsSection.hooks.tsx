@@ -16,16 +16,16 @@ const PodcastDetailsHooks: any = (podcastid: string) => {
     const fetchDataByDayCondition = () => {
         const podcast: TPodcastStorage = podcastsStorageService.checkIfCanFetchPodcast(podcastid);
         // si ha devuelto falso significa que o no existe la variable o ha pasado mas de 1 dia por lo que puede hacer fetch
-        if (!podcast) {
+        // if (!podcast) {
             fetchPodcastDetails(podcastid, setPodcastDetails, setIsFetchingDetails);
             fetchPodcastEpisodes(podcastid, setPodcastEpisodes, setIsFetchingEpisodes);
             setHasFetchedDataByOneDay(true);
-        } else {
-            setPodcastDetails(podcast.podcastDetails);
-            setPodcastEpisodes(podcast.episodes);
-            setIsFetchingDetails(false);
-            setIsFetchingEpisodes(false);
-        }
+        // } else {
+        //     setPodcastDetails(podcast.podcastDetails);
+        //     setPodcastEpisodes(podcast.episodes);
+        //     setIsFetchingDetails(false);
+        //     setIsFetchingEpisodes(false);
+        // }
     }
     useEffect(() => {
         fetchDataByDayCondition();

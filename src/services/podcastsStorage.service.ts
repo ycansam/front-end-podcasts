@@ -3,7 +3,8 @@ import TPodcastStorage from "@/types/TPodcastStorage";
 import TPodcastArrayStorage from "@/types/TPodcastsStorage";
 
 const localStorageVariables = {
-    topPodcasts: "top-podcasts"
+    topPodcasts: "top-podcasts",
+    podcastDetails: "podcast-details"
 }
 
 class PodcastsStorageService {
@@ -22,10 +23,14 @@ class PodcastsStorageService {
         }
     }
 
+    private saveItem(identifier: string, body: Object): void {
+        localStorage.setItem(identifier, JSON.stringify(body))
+    }
+
     // Guarda un podcast y sus episodios durante 1 dia
     public savePodcastAndEpisodes1Day(podcastId: string, { podcastDetails, episodes }: any): void {
         try {
-            localStorage.setItem(podcastId, JSON.stringify({ podcastDetails, episodes, saved_at: Date.now() }))
+            this.saveItem(podcastId, { podcastDetails, episodes, saved_at: Date.now() });
             // Almacenar la información
         } catch (err) {
             console.error(err);
@@ -67,7 +72,6 @@ class PodcastsStorageService {
             const currentTime = Date.now();
             const podcastsArray: TPodcastArrayStorage = this.getParsedItem(topPodcasts);
             if (podcastsArray.podcasts && (currentTime - podcastsArray.saved_at) < 24 * 60 * 60 * 1000) {
-                console.log(podcastsArray.podcasts)
                 return podcastsArray.podcasts;
             }
             return false;
@@ -75,13 +79,19 @@ class PodcastsStorageService {
         return false;
     }
 
-    private setTopPodcasts(podcasts: TPodcast[]): void {
-        localStorage.setItem(localStorageVariables.topPodcasts, JSON.stringify({ podcasts, saved_at: Date.now() }))
+    public getPodcast(podcastid: string): TPodcast {
+        const podcastsString: string = this.getItemData(localStorageVariables.topPodcasts);
+        const podcasts: TPodcastArrayStorage = this.getParsedItem(podcastsString);
+        return podcasts.podcasts.find((podcast) => {
+            return podcast.id.attributes["im:id"] === podcastid;
+        }) as TPodcast;
+
     }
+
 
     public saveTopPodcasts(podcasts: TPodcast[]): void {
         try {
-            this.setTopPodcasts(podcasts);
+            this.saveItem(localStorageVariables.topPodcasts, { podcasts, saved_at: Date.now() });
         } catch (err) {
             console.error(err);
         }

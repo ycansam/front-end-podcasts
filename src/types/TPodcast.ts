@@ -62,6 +62,7 @@ type TPodcast = {
     title: {
         label: string;
     }
+    trackCount: number;
 }
 
 export default TPodcast;
