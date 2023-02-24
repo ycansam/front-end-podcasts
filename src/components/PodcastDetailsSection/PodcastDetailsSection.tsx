@@ -6,6 +6,8 @@ import TPodcastEpisode from '@/types/TPodcastEpisode';
 import PodcastContext from './contexts/PodcastDetailsSection.context';
 import podcastsStorageService from '@/services/podcastsStorage.service';
 import TPodcast from '@/types/TPodcast';
+import { useContext } from 'react';
+import HeaderContext from '../Header/context/Header.context';
 type TPodcastDetailsSection = {
     podcastid: string;
 }
@@ -18,10 +20,14 @@ type PodcastsListHooksReturn = {
 };
 
 const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }): JSX.Element => {
+    const headerContext = useContext(HeaderContext);
     const { podcastDetails, podcastsEpisodes, isFetchingDetails, isFetchingEpisodes }: PodcastsListHooksReturn = PodcastDetailsHooks(podcastid);
 
-    if (isFetchingDetails || isFetchingEpisodes)
-        return <p>is loading...</p>
+    if (isFetchingDetails || isFetchingEpisodes) {
+        headerContext?.setIsLoading(true);
+        return <></>
+    }
+    headerContext?.setIsLoading(false);
 
     //  si se ha obtenido el podcast correctamente se ejucataran las acciones
     podcastsStorageService.savePodcastAndEpisodes1Day({ podcastDetails, episodes: podcastsEpisodes })

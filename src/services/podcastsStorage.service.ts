@@ -7,6 +7,9 @@ const localStorageVariables = {
     topPodcasts: "top-podcasts",
     podcastDetails: "podcast-details"
 }
+const millis = {
+    dia: 24 * 60 * 60 * 1000
+}
 
 type SavePodcastAndEpisodes = {
     podcastDetails: TPodcast;
@@ -43,7 +46,7 @@ class PodcastsStorageService {
 
                 // Si es el mismo podcast y ha pasado mas de 1 dia se vuelve a guardar
                 if (podcast.podcastDetails.id.attributes["im:id"] === podcastDetails.id.attributes["im:id"]) {
-                    if (!podcast || (currentTime - podcast.saved_at) > 24 * 60 * 60 * 1000) {
+                    if (!podcast || (currentTime - podcast.saved_at) > millis.dia) {
                         this.saveItem(localStorageVariables.podcastDetails, { podcastDetails, episodes, saved_at: Date.now() });
                     }
                 } else {
@@ -71,7 +74,7 @@ class PodcastsStorageService {
             const podcast: TPodcastStorage = this.getParsedItem(podcaststring);
             // si el podcast que esta guardado es el mismo
             if (podcast.podcastDetails.id.attributes["im:id"] == podcastId) {
-                if (podcast && (currentTime - podcast.saved_at) < 24 * 60 * 60 * 1000) {
+                if (podcast && (currentTime - podcast.saved_at) < millis.dia) {
                     return podcast;
                 }
             }
@@ -97,7 +100,7 @@ class PodcastsStorageService {
         if (topPodcasts !== null) {
             const currentTime = Date.now();
             const podcastsArray: TPodcastArrayStorage = this.getParsedItem(topPodcasts);
-            if (podcastsArray.podcasts && (currentTime - podcastsArray.saved_at) < 24 * 60 * 60 * 1000) {
+            if (podcastsArray.podcasts && (currentTime - podcastsArray.saved_at) < millis.dia) {
                 return podcastsArray.podcasts;
             }
             return false;

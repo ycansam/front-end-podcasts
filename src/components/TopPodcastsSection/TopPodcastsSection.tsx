@@ -1,10 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import styles from './TopPodcastsSection.module.css'
 import PodcastsList from "./PodcastsList/PodcastsList"
 import FilterPodcasts from './FilterPodcasts/FilterPodcasts';
 import PodcastsListHooks from './PodcastsList/hooks/PodcastsList.hooks';
 import TPodcast from '@/types/TPodcast';
 import PodcastsSectionServices from './services/PodcastsSection.service';
+import HeaderContext from '../Header/context/Header.context';
 
 type PodcastsListHooksReturn = {
     podcasts: TPodcast[];
@@ -16,7 +17,7 @@ type PodcastsSectionServicesReturn = {
 };
 
 const PodcastsSection: React.FC = () => {
-
+    const headerContext = useContext(HeaderContext);
     const { podcasts, isFetching }: PodcastsListHooksReturn = PodcastsListHooks();
 
     const [filter, setFilter] = useState('');
@@ -28,8 +29,11 @@ const PodcastsSection: React.FC = () => {
         return getFiltredPodcastsByName(podcasts, filter);
     }, [filter, getFiltredPodcastsByName, podcasts]);
 
-    if (isFetching)
-        return <p>is loading...</p>
+    if (isFetching) {
+        headerContext?.setIsLoading(isFetching);
+        return <></>;
+    }
+    headerContext?.setIsLoading(false);
 
     return (
         <section className={styles.sectionContainer}>

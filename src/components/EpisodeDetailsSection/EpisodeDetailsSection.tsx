@@ -4,6 +4,8 @@ import PodcastDetailsCard from '../PodcastDetailsCard/PodcastDetailsCard'
 import EpisodeCard from './EpisodeCard/EpisodeCard'
 import TPodcastEpisode from '@/types/TPodcastEpisode'
 import TPodcast from '@/types/TPodcast'
+import { useContext } from 'react'
+import HeaderContext from '../Header/context/Header.context'
 
 type TEpisodeDetailsSection = {
     episodeid: string;
@@ -16,11 +18,14 @@ type EpisodeDetailsHooksReturn = {
 }
 
 const EpisodeDetialsSection: React.FC<TEpisodeDetailsSection> = ({ episodeid }) => {
-
+    const headerContext = useContext(HeaderContext);
     const { podcastDetails, isFetchingPodcastDetails, episodeDetails }: EpisodeDetailsHooksReturn = EpisodeDetailsHooks(episodeid);
 
-    if (isFetchingPodcastDetails)
-        return <p>...Loading</p>
+    if (isFetchingPodcastDetails) {
+        headerContext?.setIsLoading(true);
+        return <></>
+    }
+    headerContext?.setIsLoading(false);
 
     return (
         <section className={styles.sectionContainer}>

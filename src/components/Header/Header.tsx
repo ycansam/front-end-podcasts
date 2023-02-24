@@ -2,10 +2,10 @@ import Link from "next/link"
 import styles from './Header.module.css'
 
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect, useContext } from 'react';
+import HeaderContext from "./context/Header.context";
 const Header: React.FC = () => {
-
+    const { isLoading } = useContext<any>(HeaderContext);
     const router = useRouter()
     const [loading, setLoading] = useState(false);
 
@@ -23,11 +23,11 @@ const Header: React.FC = () => {
             router.events.off('routeChangeError', handleComplete);
         };
     }, []);
-  
+
     return (
         <nav className={styles.navContainer}>
             <Link href={'/'}><h1 className={styles.title}>Podcaster</h1></Link>
-            {loading && <div className={styles.circle}></div>}
+            {isLoading && <div className={styles.circle}></div>}
         </nav>
     )
 }
