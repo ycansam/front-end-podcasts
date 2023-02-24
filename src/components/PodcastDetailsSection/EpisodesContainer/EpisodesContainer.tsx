@@ -1,4 +1,4 @@
-import styles from './EpisodesList.module.css'
+import styles from './EpisodesContainer.module.css'
 import TPodcastEpisode from '@/types/TPodcastEpisode'
 import TableEpisodes from './TableEpisodes/TableEpisodes';
 

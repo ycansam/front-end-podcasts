@@ -1,5 +1,5 @@
 import PodcastDetailsCard from '../PodcastDetailsCard/PodcastDetailsCard';
-import EpisodesList from './EpisodesList/EpisodesList';
+import EpisodesContainer from './EpisodesContainer/EpisodesContainer';
 import styles from './PodcastDetailsSection.module.css'
 import PodcastDetailsHooks from './hooks/PodcastDetailsSection.hooks';
 import TPodcastEpisode from '@/types/TPodcastEpisode';
@@ -36,7 +36,7 @@ const PodcastDetailsSection: React.FC<TPodcastDetailsSection> = ({ podcastid }) 
             />
             {/* context pasando el podcastid para poder hacer la navegacion */}
             <PodcastContext.Provider value={{ podcastid }}>
-                <EpisodesList
+                <EpisodesContainer
                     episodes={podcastsEpisodes}
                     episodesLength={podcastDetails.trackCount}
                 />
