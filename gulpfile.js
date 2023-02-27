@@ -22,6 +22,7 @@ const build = () => {
     return gulp.src(paths.scripts)
         .pipe(sourcemaps.init())
         .pipe(tsProject()) // hacemos que sea el proyecto de TS
+        .pipe(uglify())
         .pipe(sourcemaps.write('.'))
         .pipe(concat('bundle.js')) // Concatenamos todos los archivos en uno solo
         .pipe(rename({ suffix: '.min' })) // Renombramos el archivo resultante añadiéndole un sufijo '.min'
