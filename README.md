@@ -41,6 +41,9 @@ Dirigirse al directorio del proyecto
   cd front-end-podcasts
 ```
 ### Modo de desarrollo
+Obtener acceso cors anyware:
+[Cors Demo](https://cors-anywhere.herokuapp.com/corsdemo)
+
 Para ejecutar la aplicación en modo de desarrollo, abra una terminal y ejecute los siguientes comandos:
 ```bash
 npm install
@@ -48,6 +51,9 @@ npm run dev
 ```
 
 ### Build
+Obtener acceso cors anyware:
+[Cors Demo](https://cors-anywhere.herokuapp.com/corsdemo)
+
 Para compilar la aplicación, abra una terminal y ejecute los siguientes comandos:
 ```bash
 npm install
