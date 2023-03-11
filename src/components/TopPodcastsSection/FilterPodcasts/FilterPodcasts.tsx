@@ -15,8 +15,8 @@ const FilterPodcasts: React.FC<TPropsFilter> = ({ filter, setFilter, podcastsLen
 
     return (
         <div className={styles.containerFilter} >
-            <span className={styles.podcastsLength}>{podcastsLength}</span>
-            <input className={styles.filter} name='filter' placeholder='Filter Podcasts...' value={filter} onChange={handleChange}></input>
+            <span data-testid="test-span" className={styles.podcastsLength}>{podcastsLength}</span>
+            <input data-testid="test-input" className={styles.filter} name='filter' placeholder='Filter Podcasts...' value={filter} onChange={handleChange}></input>
         </div>
     )
 
